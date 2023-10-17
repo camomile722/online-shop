@@ -1,17 +1,24 @@
-import { Box } from "@chakra-ui/react";
-import React from "react";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { Main } from "./components/Main";
+import { HomeScreen } from "./screens/HomeScreen";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import { ProductDetailScreen } from "./screens/ProductDetailScreen";
 
 function App() {
-  return (
-    <Box>
-      <Header />
-      <Main />
-      <Footer />
-    </Box>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<HomeScreen />} />
+                <Route path="/shop" element={<HomeScreen />} />
+                <Route path="/categories" element={<h1>Categories</h1>} />
+                <Route path="/news" element={<h1>News</h1>} />
+                <Route path="/product/:id" element={<ProductDetailScreen />} />
+                {/* Using path="*"" means "match anything", so this route
+              acts like a catch-all for URLs that we don't have explicit
+              routes for. */}
+                <Route path="*" element={<h2> OOps </h2>} />
+            </Route>
+        </Routes>
+    );
 }
 
 export default App;
