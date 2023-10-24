@@ -9,7 +9,6 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<HomeScreen />} />
-                <Route path="/shop" element={<HomeScreen />} />
                 <Route path="/categories" element={<h1>Categories</h1>} />
                 <Route path="/news" element={<h1>News</h1>} />
                 <Route path="/product/:id" element={<ProductDetailScreen />} />

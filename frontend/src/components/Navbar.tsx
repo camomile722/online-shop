@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { HamburgerIcon, Like, Search, ShoppingBag, User } from "../theme/icons";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Wrapper from "./Wrapper";
 import { CartProps } from "../slices/cartSlice";
@@ -21,7 +21,20 @@ export const Navbar = () => {
     const [isActive, setIsActive] = useState<string>("");
     const { cartItems } = useSelector((state: CartProps) => state.cart);
     console.log(cartItems);
-
+    const menuItems = [
+        {
+            name: "Home",
+            path: "/",
+        },
+        {
+            name: "Categories",
+            path: "/categories",
+        },
+        {
+            name: "News",
+            path: "/news",
+        },
+    ];
     return (
         <Wrapper>
             <Flex justifyContent="space-between" alignItems="center" as="nav">
@@ -57,42 +70,21 @@ export const Navbar = () => {
                     fontWeight={600}
                 >
                     <Box gap="3rem" display={{ base: "none", md: "flex" }}>
-                        <ListItem
-                            onClick={() => {
-                                setIsActive("home");
-                            }}
-                            color={isActive === "home" ? "brand.200" : "black"}
-                        >
-                            <Link to="/">Home</Link>
-                        </ListItem>
-                        <ListItem
-                            onClick={() => {
-                                setIsActive("shop");
-                            }}
-                            color={isActive === "shop" ? "brand.200" : "black"}
-                        >
-                            <Link to="/">Shop</Link>
-                        </ListItem>
-                        <ListItem
-                            onClick={() => {
-                                setIsActive("categories");
-                            }}
-                            color={
-                                isActive === "categories"
-                                    ? "brand.200"
-                                    : "black"
-                            }
-                        >
-                            <Link to="/categories">Categories</Link>
-                        </ListItem>
-                        <ListItem
-                            onClick={() => {
-                                setIsActive("news");
-                            }}
-                            color={isActive === "news" ? "brand.200" : "black"}
-                        >
-                            <Link to="/news">News</Link>
-                        </ListItem>
+                        {menuItems.map(item => (
+                            <ListItem>
+                                <NavLink to={item.path}>
+                                    {({ isActive }) => (
+                                        <Text
+                                            color={
+                                                isActive ? "brand.200" : "black"
+                                            }
+                                        >
+                                            {item.name}
+                                        </Text>
+                                    )}
+                                </NavLink>
+                            </ListItem>
+                        ))}
                     </Box>
                 </UnorderedList>
                 <UnorderedList

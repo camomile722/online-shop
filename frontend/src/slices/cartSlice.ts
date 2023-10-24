@@ -43,6 +43,15 @@ const cartSlice = createSlice({
             return updateCart(state);
         },
         changeQty: (state, action: PayloadAction<ProductProps>) => {
+            const item = action.payload;
+            const existItem = state.cartItems.find(
+                (x: ProductProps) => x._id === item._id
+            );
+            if (existItem) {
+                state.cartItems = state.cartItems.map((x: ProductProps) =>
+                    x._id === existItem._id ? { ...x, qty: item.qty } : x
+                );
+            }
             return updateCart(state);
         },
     },
