@@ -13,29 +13,36 @@ import {
 import { useState } from "react";
 import { HamburgerIcon, Like, Search, ShoppingBag, User } from "../theme/icons";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Wrapper from "./Wrapper";
+import { CartProps } from "../slices/cartSlice";
 
 export const Navbar = () => {
     const [isActive, setIsActive] = useState<string>("");
+    const { cartItems } = useSelector((state: CartProps) => state.cart);
+    console.log(cartItems);
+
     return (
         <Wrapper>
             <Flex justifyContent="space-between" alignItems="center" as="nav">
                 <Box>
-                    <Text fontSize="4xl" fontWeight="bold">
-                        SH
-                        <Text as="span" color="brand.200">
-                            OO
+                    <Link to="/">
+                        <Text fontSize="4xl" fontWeight="bold">
+                            SH
+                            <Text as="span" color="brand.200">
+                                OO
+                            </Text>
+                            P
                         </Text>
-                        P
-                    </Text>
-                    <Text
-                        fontSize="sm"
-                        color="gray.500"
-                        lineHeight="0"
-                        fontWeight="extrabold"
-                    >
-                        NOW!
-                    </Text>
+                        <Text
+                            fontSize="sm"
+                            color="gray.500"
+                            lineHeight="0"
+                            fontWeight="extrabold"
+                        >
+                            NOW!
+                        </Text>
+                    </Link>
                 </Box>
                 <UnorderedList
                     styleType="none"
@@ -64,7 +71,7 @@ export const Navbar = () => {
                             }}
                             color={isActive === "shop" ? "brand.200" : "black"}
                         >
-                            <Link to="/shop">Shop</Link>
+                            <Link to="/">Shop</Link>
                         </ListItem>
                         <ListItem
                             onClick={() => {
@@ -96,9 +103,33 @@ export const Navbar = () => {
                     <ListItem>
                         <Search boxSize="20px" />
                     </ListItem>
-                    <ListItem>
-                        <ShoppingBag boxSize="20px" />
-                    </ListItem>
+                    <Link to="/cart">
+                        <ListItem position="relative">
+                            <ShoppingBag boxSize="20px" />
+                            {cartItems.length > 0 && (
+                                <Box
+                                    bg="brand.200"
+                                    borderRadius="50%"
+                                    position="absolute"
+                                    bottom="3"
+                                    left="3"
+                                    w="1rem"
+                                    h="1rem"
+                                    display="flex"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                >
+                                    <Text fontSize="xs" color="white">
+                                        {cartItems.reduce(
+                                            (acc: number, item: any) =>
+                                                acc + item.qty,
+                                            0
+                                        )}
+                                    </Text>
+                                </Box>
+                            )}
+                        </ListItem>
+                    </Link>
                     <ListItem>
                         <Like boxSize="20px" />
                     </ListItem>

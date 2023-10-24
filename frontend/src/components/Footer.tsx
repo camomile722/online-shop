@@ -87,7 +87,7 @@ export const Footer = () => {
                 <Flex mt={6}>
                     <Text fontSize="xs">
                         {" "}
-                        Free delivery for orders above 29.95 €, else shipping
+                        Free delivery for orders above 29.90 €, else shipping
                         fees of 3.90 € apply <br />
                         Lowest total price of the last 30 days before the price
                         reduction

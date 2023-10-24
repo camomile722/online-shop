@@ -20,6 +20,7 @@ export interface ProductProps {
     numReviews: number;
     countInStock: number;
     category: string;
+    qty: number;
 }
 
 export interface ProductItemProps {

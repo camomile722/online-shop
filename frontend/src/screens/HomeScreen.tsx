@@ -1,9 +1,10 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { ProductList } from "../components/ProductList";
 import { SliderItem } from "../components/SliderItem";
 import { ProductProps } from "../components/Product";
 import axios from "axios";
+import { useGetProductsQuery } from "../slices/productsApiSlice";
 
 export interface SlideDataProps {
     id: string;
@@ -17,9 +18,10 @@ export interface SlideDataProps {
 }
 
 export const HomeScreen = () => {
-    const [products, setProducts] = useState<ProductProps[]>([]);
+    // const [products, setProducts] = useState<ProductProps[]>([]);
     const [slides, setSlides] = useState<SlideDataProps[]>([]);
     const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
+    const { data: products, isLoading, error } = useGetProductsQuery([]);
 
     const nextSlide = () => {
         setSelectedSlideIndex(selectedSlideIndex + 1);
@@ -32,12 +34,12 @@ export const HomeScreen = () => {
         if (selectedSlideIndex === 0) setSelectedSlideIndex(slides.length - 1);
     };
     useEffect(() => {
-        const fetchItems = async () => {
-            const { data } = await axios.get("/api/products");
+        // const fetchItems = async () => {
+        //     const { data } = await axios.get("/api/products");
 
-            setProducts(data);
-        };
-        fetchItems();
+        //     setProducts(data);
+        // };
+        // fetchItems();
 
         const fetchSlides = async () => {
             const { data } = await axios.get("/api/slides");
@@ -54,7 +56,13 @@ export const HomeScreen = () => {
                 nextSlide={nextSlide}
             />
             <Box as="main" py="6">
-                <ProductList products={products} />
+                {isLoading ? (
+                    <Flex justifyContent="center" my={4}>
+                        <Spinner />
+                    </Flex>
+                ) : (
+                    <ProductList products={products} />
+                )}
             </Box>
         </Box>
     );
