@@ -6,18 +6,23 @@ import { ProductPrice } from "./ProductPrice";
 
 export interface ProductInfoProps {
     product: ProductProps;
-    setQty: React.Dispatch<React.SetStateAction<number>>;
+    showSelectQty?: boolean;
+    setQty?: React.Dispatch<React.SetStateAction<number>>;
 }
-export const ProductInfo = ({ product, setQty }: ProductInfoProps) => {
+export const ProductInfo = ({
+    product,
+    setQty,
+    showSelectQty,
+}: ProductInfoProps) => {
     return (
         <Box>
-            <Text as="h1" fontSize={{ base: "2xl", md: "4xl" }}>
+            <Text as="h1" fontSize={{ base: "2xl", xl: "4xl" }}>
                 {product?.title}
             </Text>
             <Text>{product?.description}</Text>
 
             <ProductPrice product={product} showOriginalPrice />
-            {product?.countInStock > 0 && (
+            {product?.countInStock > 0 && showSelectQty && setQty && (
                 <CustomTooltip label="Select quantity">
                     <Select
                         onChange={e => setQty(Number(e.target.value))}

@@ -11,14 +11,7 @@ export const ProductList = ({ products }: ProductListProps) => {
             <Flex flexWrap="wrap" gap="3" justifyContent="center">
                 {products.map(product => (
                     <Box key={product._id} width={{ base: "45%", md: "23%" }}>
-                        <ProductItem
-                            product={product}
-                            onModalOpen={() => console.log("Modal opened")}
-                            setSelectedImage={() =>
-                                console.log("Image selected")
-                            }
-                            key={product._id}
-                        />
+                        <ProductItem product={product} key={product._id} />
                     </Box>
                 ))}
             </Flex>

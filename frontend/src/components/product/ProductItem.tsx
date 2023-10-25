@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "../rating/Rating";
@@ -6,7 +6,7 @@ import { toggleToWishList } from "../../slices/wishListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import WishListButton from "../button/WishListButton";
 import { ProductPrice } from "./ProductPrice";
-import { RectangleBadge } from "../badge/RectangleBadge";
+import ProductCard from "./ProductCard";
 
 export interface ProductProps {
     _id: string;
@@ -28,38 +28,15 @@ export interface ProductProps {
 
 export interface ProductItemProps {
     product: ProductProps;
-    onModalOpen: () => void;
-    setSelectedImage: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export const ProductItem = ({
-    product,
-    onModalOpen,
-    setSelectedImage,
-}: ProductItemProps) => {
+export const ProductItem = ({ product }: ProductItemProps) => {
     const [isLiked, setIsLiked] = useState(false);
-    const [likes, setLikes] = useState(product.likes);
     const dispatch = useDispatch();
     const { items } = useSelector((state: any) => state.wishList);
-    const handleLikeToggle = () => {
-        if (isLiked) {
-            // If already liked, unlike the image
-            setIsLiked(false);
-            setLikes(likes - 1);
-        } else {
-            // If not liked, like the image
-            setIsLiked(true);
-            setLikes(likes + 1);
-        }
-    };
+
     const handleAddToWishlist = () => {
-        if (handleLikeToggle) {
-            handleLikeToggle();
-        }
         dispatch(toggleToWishList(product));
-        console.log("add to wishlist", product);
-        console.log("isLiked", isLiked);
-        setIsLiked(!isLiked);
     };
 
     useEffect(() => {
@@ -80,29 +57,10 @@ export const ProductItem = ({
                     />
                 </Flex>
                 <Link to={`/product/${product._id}`}>
-                    <Box position="relative" width="100%" key={product._id}>
-                        <Image
-                            src={product?.image?.url}
-                            alt="sale"
-                            objectFit="cover"
-                            onClick={() => {
-                                onModalOpen();
-                                setSelectedImage(product);
-                            }}
-                            width="100%"
-                            height={{ base: "174px", md: "320px" }}
-                            cursor="pointer"
-                            _hover={{
-                                filter: "brightness(90%)",
-                                overflow: "hidden",
-                            }}
-                        />
-                        {product?.sale && (
-                            <RectangleBadge top="1%" left="2">
-                                - {product?.sale}%
-                            </RectangleBadge>
-                        )}
-                    </Box>
+                    <ProductCard
+                        product={product}
+                        imageHeight={{ base: "174px", md: "320px" }}
+                    />
                 </Link>
             </Box>
             <Link to={`/product/${product._id}`}>

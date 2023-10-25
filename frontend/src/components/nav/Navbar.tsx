@@ -27,7 +27,7 @@ export const Navbar = () => {
         {
             id: 2,
             icon: <Like boxSize="20px" />,
-            url: "/whish-list",
+            url: "/wish-list",
             badge: items.length > 0,
             badgeCount: items.length,
         },

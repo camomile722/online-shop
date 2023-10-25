@@ -1,12 +1,4 @@
-import {
-    Box,
-    Button,
-    Flex,
-    IconButton,
-    Image,
-    Spinner,
-    Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Spinner } from "@chakra-ui/react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../components/wrapper/Wrapper";
@@ -16,11 +8,11 @@ import { useGetProductByIdQuery } from "../slices/productsApiSlice";
 import { addToCart } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Notification from "../components/notification/Notification";
-import { toggleToWishList, removeFromWishList } from "../slices/wishListSlice";
+import { toggleToWishList } from "../slices/wishListSlice";
 import { ShippingInfo } from "../components/product/ShippingInfo";
 import { ProductInfo } from "../components/product/ProductInfo";
 import WishListButton from "../components/button/WishListButton";
-import { RectangleBadge } from "../components/badge/RectangleBadge";
+import ProductCard from "../components/product/ProductCard";
 
 export interface ProductDetailScreenProps {
     handleLikeToggle?: () => void;
@@ -62,13 +54,6 @@ export const ProductDetailScreen = ({
         dispatch(toggleToWishList(product));
         console.log("add to wishlist", product);
         console.log("isLiked", isLiked);
-    };
-    const handleRemoveFromWishlist = () => {
-        if (handleLikeToggle) {
-            handleLikeToggle();
-        }
-        dispatch(removeFromWishList(product));
-        console.log("remove from wishlist", product);
     };
     const { items } = useSelector((state: any) => state.wishList);
     const [isLiked, setIsLiked] = useState(false);
@@ -112,23 +97,12 @@ export const ProductDetailScreen = ({
                             onClick={() => window.history.back()}
                         />
                         <Flex
-                            gap={{ base: 4, md: 10, lg: 20 }}
+                            gap={{ base: 4 }}
                             flexWrap="wrap"
                             justifyContent="space-between"
                         >
-                            <Box
-                                position="relative"
-                                width={{ base: "100%", md: "50%" }}
-                            >
-                                <Image
-                                    src={product?.image.url}
-                                    alt={product?.title}
-                                />
-                                {product?.sale && (
-                                    <RectangleBadge top="1%" left="2">
-                                        - {product?.sale}%
-                                    </RectangleBadge>
-                                )}
+                            <Box width={{ base: "100%", md: "40%" }}>
+                                <ProductCard product={product} />
                             </Box>
                             <Flex
                                 flexDir="column"
@@ -138,6 +112,7 @@ export const ProductDetailScreen = ({
                                 <ProductInfo
                                     product={product}
                                     setQty={setQty}
+                                    showSelectQty
                                 />
                                 <Flex gap="2">
                                     <Button
