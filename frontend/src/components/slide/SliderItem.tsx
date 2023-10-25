@@ -7,8 +7,9 @@ import {
     Image,
     Text,
 } from "@chakra-ui/react";
-import { ArrowLeft, ArrowRight } from "../theme/icons";
-import Wrapper from "./Wrapper";
+import { ArrowLeft, ArrowRight } from "../../theme/icons";
+import Wrapper from "../wrapper/Wrapper";
+import { RectangleBadge } from "../badge/RectangleBadge";
 
 export interface SlideDataProps {
     id: string;
@@ -39,18 +40,10 @@ export const SliderItem = ({ item, prevSlide, nextSlide }: SliderItemProps) => {
                         py="10"
                         px="6"
                     >
-                        <Box
-                            background="brand.200"
-                            color="white"
-                            fontWeight="extrabold"
-                            position="absolute"
-                            right="0"
-                            top="0"
-                            py="4"
-                            px="8"
-                        >
+                        <RectangleBadge top="0" right="0">
                             Bestseller
-                        </Box>
+                        </RectangleBadge>
+
                         <Box>
                             <Text>
                                 <Text

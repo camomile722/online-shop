@@ -1,4 +1,4 @@
-import { ProductProps } from "../components/Product";
+import { ProductProps } from "../components/product/ProductItem";
 
 export interface CartItemsProps {
     cartItems: ProductProps[];

@@ -2,15 +2,15 @@ import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Info } from "../theme/icons";
-import Wrapper from "../components/Wrapper";
-import { ProductProps } from "../components/Product";
+import Wrapper from "../components/wrapper/Wrapper";
+import { ProductProps } from "../components/product/ProductItem";
 import {
     CartProps,
     addToCart,
     removeFromCart,
     changeQty,
 } from "../slices/cartSlice";
-import CartItem from "../components/CartItem";
+import CartItem from "../components/cart/CartItem";
 export interface CartScreenProps {
     cartItems: any;
 }

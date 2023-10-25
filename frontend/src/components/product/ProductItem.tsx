@@ -1,9 +1,12 @@
-import { Box, Flex, IconButton, Image, Text } from "@chakra-ui/react";
-import { useState } from "react";
-import { Like, Liked } from "../theme/icons";
-import { CustomTooltip } from "./CustomTooltip";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Rating } from "./Rating";
+import { Rating } from "../rating/Rating";
+import { toggleToWishList } from "../../slices/wishListSlice";
+import { useDispatch, useSelector } from "react-redux";
+import WishListButton from "../button/WishListButton";
+import { ProductPrice } from "./ProductPrice";
+import { RectangleBadge } from "../badge/RectangleBadge";
 
 export interface ProductProps {
     _id: string;
@@ -36,6 +39,8 @@ export const ProductItem = ({
 }: ProductItemProps) => {
     const [isLiked, setIsLiked] = useState(false);
     const [likes, setLikes] = useState(product.likes);
+    const dispatch = useDispatch();
+    const { items } = useSelector((state: any) => state.wishList);
     const handleLikeToggle = () => {
         if (isLiked) {
             // If already liked, unlike the image
@@ -47,32 +52,32 @@ export const ProductItem = ({
             setLikes(likes + 1);
         }
     };
+    const handleAddToWishlist = () => {
+        if (handleLikeToggle) {
+            handleLikeToggle();
+        }
+        dispatch(toggleToWishList(product));
+        console.log("add to wishlist", product);
+        console.log("isLiked", isLiked);
+        setIsLiked(!isLiked);
+    };
+
+    useEffect(() => {
+        if (items && items.find((item: any) => item?._id === product?._id)) {
+            setIsLiked(true);
+        } else {
+            setIsLiked(false);
+        }
+    }, [items, product]);
 
     return (
         <Box>
             <Box position="relative">
                 <Flex top="3" right="3" position="absolute" zIndex="1">
-                    {isLiked ? (
-                        <CustomTooltip label="Remove from wishlist">
-                            <IconButton
-                                aria-label="Remove from wishlist"
-                                icon={<Liked color="brand.200" />}
-                                opacity="0.7"
-                                _hover={{ opacity: "1" }}
-                                onClick={handleLikeToggle}
-                            />
-                        </CustomTooltip>
-                    ) : (
-                        <CustomTooltip label="Add to wishlist">
-                            <IconButton
-                                aria-label="Add to wishlist"
-                                icon={<Like />}
-                                opacity="0.7"
-                                _hover={{ opacity: "1" }}
-                                onClick={handleLikeToggle}
-                            />
-                        </CustomTooltip>
-                    )}
+                    <WishListButton
+                        isLiked={isLiked}
+                        handleAddToWishlist={handleAddToWishlist}
+                    />
                 </Flex>
                 <Link to={`/product/${product._id}`}>
                     <Box position="relative" width="100%" key={product._id}>
@@ -93,21 +98,9 @@ export const ProductItem = ({
                             }}
                         />
                         {product?.sale && (
-                            <Box
-                                bg="brand.200"
-                                position="absolute"
-                                bottom="1%"
-                                left="8px"
-                                padding="10px 15px"
-                            >
-                                <Text
-                                    color="white"
-                                    fontSize="sm"
-                                    wordBreak="break-word"
-                                >
-                                    - {product?.sale}%
-                                </Text>
-                            </Box>
+                            <RectangleBadge top="1%" left="2">
+                                - {product?.sale}%
+                            </RectangleBadge>
                         )}
                     </Box>
                 </Link>
@@ -122,19 +115,12 @@ export const ProductItem = ({
                         {product?.brand}
                     </Text>
                     <Text fontSize="xs">{product?.title}</Text>
-                    <Text
+                    <ProductPrice
+                        product={product}
                         fontSize="sm"
-                        fontWeight="bold"
-                        color={product?.sale ? "brand.200" : "black"}
-                    >
-                        {product?.price} €
-                    </Text>
-                    {product?.sale && (
-                        <Text fontSize="xs">
-                            Original Price:{" "}
-                            {(product.price + product.sale).toFixed(2)} €
-                        </Text>
-                    )}
+                        showOriginalPrice
+                    />
+
                     <Rating
                         value={product.rating}
                         numReviews={product.numReviews}

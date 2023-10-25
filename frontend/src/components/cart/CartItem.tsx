@@ -8,9 +8,9 @@ import {
     Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Delete, Like } from "../theme/icons";
-import { CustomTooltip } from "./CustomTooltip";
-import { ProductProps } from "./Product";
+import { Delete, Like } from "../../theme/icons";
+import { CustomTooltip } from "../tooltip/CustomTooltip";
+import { ProductProps } from "../product/ProductItem";
 
 export interface CartItemProps {
     item: ProductProps;

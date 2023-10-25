@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ProductProps } from "../components/Product";
+import { ProductProps } from "../components/product/ProductItem";
 import { CartItemsProps, updateCart } from "../utils/cartUtils";
 
 export interface CartProps {

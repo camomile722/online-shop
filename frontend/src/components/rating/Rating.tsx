@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import { EmptyStar, FullStar, HalfStar } from "../theme/icons";
+import { EmptyStar, FullStar, HalfStar } from "../../theme/icons";
 
 export interface RatingProps {
     value: number;

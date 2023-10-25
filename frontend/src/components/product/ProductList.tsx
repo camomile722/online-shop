@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import { ProductItem, ProductProps } from "./Product";
-import Wrapper from "./Wrapper";
+import { ProductItem, ProductProps } from "./ProductItem";
+import Wrapper from "../wrapper/Wrapper";
 export interface ProductListProps {
     products: ProductProps[];
 }

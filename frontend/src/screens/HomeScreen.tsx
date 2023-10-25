@@ -1,8 +1,8 @@
 import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { ProductList } from "../components/ProductList";
-import { SliderItem } from "../components/SliderItem";
-import { ProductProps } from "../components/Product";
+import { ProductList } from "../components/product/ProductList";
+import { SliderItem } from "../components/slide/SliderItem";
+import { ProductProps } from "../components/product/ProductItem";
 import axios from "axios";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 

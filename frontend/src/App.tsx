@@ -1,6 +1,6 @@
 import { HomeScreen } from "./screens/HomeScreen";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
-import { Layout } from "./components/Layout";
+import { Layout } from "./components/layout/Layout";
 import { ProductDetailScreen } from "./screens/ProductDetailScreen";
 import { CartScreen } from "./screens/CartScreen";
 

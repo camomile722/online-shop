@@ -5,8 +5,9 @@ import {
     Pinterest,
     Twitter,
     Youtube,
-} from "../theme/icons";
-import Wrapper from "./Wrapper";
+} from "../../theme/icons";
+import Wrapper from "../wrapper/Wrapper";
+import { Logo } from "./Logo";
 
 export const Footer = () => {
     return (
@@ -59,21 +60,7 @@ export const Footer = () => {
                     </Box>
                     <Flex flexDir="column" alignItems="flex-start" gap={3}>
                         <Box>
-                            <Text fontSize="4xl" fontWeight="bold">
-                                SH
-                                <Text as="span" color="brand.200">
-                                    OO
-                                </Text>
-                                P
-                            </Text>
-                            <Text
-                                fontSize="sm"
-                                color="gray.500"
-                                lineHeight="0"
-                                fontWeight="extrabold"
-                            >
-                                NOW!
-                            </Text>
+                            <Logo />
                         </Box>
                         <Flex gap={4}>
                             <Facebook boxSize="20px" />
