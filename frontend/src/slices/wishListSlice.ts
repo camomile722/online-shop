@@ -30,15 +30,9 @@ const wishListSlice = createSlice({
 
             return updateWisList(state);
         },
-        removeFromWishList: (state, action: PayloadAction<string>) => {
-            state.items = state.items.filter(
-                (x: ProductProps) => x._id !== action.payload
-            );
-            return updateWisList(state);
-        },
     },
 });
 
-export const { toggleToWishList, removeFromWishList } = wishListSlice.actions;
+export const { toggleToWishList } = wishListSlice.actions;
 
 export default wishListSlice.reducer;

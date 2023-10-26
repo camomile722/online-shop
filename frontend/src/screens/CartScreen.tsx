@@ -11,6 +11,7 @@ import {
     changeQty,
 } from "../slices/cartSlice";
 import CartItem from "../components/cart/CartItem";
+import { useGetUsersQuery } from "../slices/userApiSlice";
 export interface CartScreenProps {
     cartItems: any;
 }
@@ -38,7 +39,9 @@ export const CartScreen = () => {
     const changeQtyHandler = (product: ProductProps, qty: number) => {
         dispatch(changeQty({ ...product, qty }));
     };
+    const { data: users, isLoading, error } = useGetUsersQuery([]);
     console.log(cartItems, itemsPrice);
+    console.log(users, "users");
 
     return (
         <Wrapper padding="0">
