@@ -132,6 +132,7 @@ export const ProductDetailScreen = ({
                                         handleAddToWishlist={
                                             handleAddToWishlist
                                         }
+                                        padding="6"
                                     />
                                 </Flex>
                                 <ShippingInfo />

@@ -8,9 +8,13 @@ import {
     Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Delete, Like } from "../../theme/icons";
+import { Delete } from "../../theme/icons";
 import { CustomTooltip } from "../tooltip/CustomTooltip";
 import { ProductProps } from "../product/ProductItem";
+import WishListButton from "../button/WishListButton";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleToWishList } from "../../slices/wishListSlice";
 
 export interface CartItemProps {
     item: ProductProps;
@@ -24,6 +28,26 @@ function CartItem({
     removeFromCartHandler,
     changeQtyHandler,
 }: CartItemProps) {
+    const [isLiked, setIsLiked] = useState(false);
+    const dispatch = useDispatch();
+    const { items: wishItems } = useSelector((state: any) => state.wishList);
+
+    const handleAddToWishlist = () => {
+        dispatch(toggleToWishList(item));
+    };
+
+    useEffect(() => {
+        const wishItem = wishItems?.find(
+            (wishItem: any) => wishItem?._id === item?._id
+        );
+
+        if (wishItem) {
+            setIsLiked(true);
+        } else {
+            setIsLiked(false);
+        }
+    }, [wishItems, item]);
+
     return (
         <Box>
             <Flex gap={4} justifyContent="space-between">
@@ -75,9 +99,11 @@ function CartItem({
                         onClick={() => removeFromCartHandler(item._id)}
                     />
                 </CustomTooltip>
-                <CustomTooltip label="Add to wishlist">
-                    <IconButton icon={<Like />} aria-label="Add to wishlist" />
-                </CustomTooltip>
+                <WishListButton
+                    isLiked={isLiked}
+                    handleAddToWishlist={handleAddToWishlist}
+                    boxSize="20px"
+                />
             </Flex>
             <Divider mb={4} />
         </Box>
