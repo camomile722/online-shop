@@ -15,6 +15,7 @@ import WishListButton from "../button/WishListButton";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleToWishList } from "../../slices/wishListSlice";
+import { ProductPrice } from "../product/ProductPrice";
 
 export interface CartItemProps {
     item: ProductProps;
@@ -79,6 +80,7 @@ function CartItem({
                                 changeQtyHandler &&
                                 changeQtyHandler(item, Number(e.target.value))
                             }
+                            mb={4}
                         >
                             {[...Array(item.countInStock).keys()].map(x => (
                                 <option key={x + 1} value={x + 1}>
@@ -86,7 +88,12 @@ function CartItem({
                                 </option>
                             ))}
                         </Select>
-                        <Text mt={4}>{item.qty * item.price} €</Text>
+                        <ProductPrice
+                            product={item}
+                            showOriginalPrice
+                            sum
+                            fontSize="md"
+                        />
                     </Box>
                 </Flex>
             </Flex>
