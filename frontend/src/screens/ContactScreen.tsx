@@ -10,7 +10,7 @@ export const ContactScreen = () => {
         <>
             <Helmet>
                 <title>
-                    Möbel kaufen | Spare bis 70% auf Möbel | SALEx Shop{" "}
+                    Möbel günstig kaufen | Spare bis 70% auf Möbel | SALEx Shop{" "}
                 </title>
                 <meta
                     name="description"
