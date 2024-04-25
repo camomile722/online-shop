@@ -6,6 +6,7 @@ import { ProductProps } from "../components/product/ProductItem";
 import axios from "axios";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import { useGetSlidesQuery } from "../slices/slideApiSlice";
+import { Helmet } from "react-helmet";
 
 export interface SlideDataProps {
     id: string;
@@ -24,7 +25,6 @@ export const HomeScreen = () => {
     const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
     const { data: products, isLoading, error } = useGetProductsQuery([]);
     const { data: slides } = useGetSlidesQuery([]);
-    console.log(slides, "slides");
 
     const nextSlide = () => {
         setSelectedSlideIndex(selectedSlideIndex + 1);
@@ -52,21 +52,30 @@ export const HomeScreen = () => {
     //     fetchSlides();
     // }, []);
     return (
-        <Box>
-            <SliderItem
-                item={slides && slides[selectedSlideIndex]}
-                prevSlide={prevSlide}
-                nextSlide={nextSlide}
-            />
-            <Box as="main" py="6">
-                {isLoading ? (
-                    <Flex justifyContent="center" my={4}>
-                        <Spinner />
-                    </Flex>
-                ) : (
-                    <ProductList products={products} />
-                )}
+        <>
+            <Helmet>
+                <title>Günstige Möbel Sale | SALEx Shop </title>
+                <meta
+                    name="description"
+                    content="Entdecken Sie den Günstige Möbel Sale und Lagerverkauf in unserem Möbelonline-Shop. Finden Sie hochwertige Möbel und Einrichtungsgegenstände zu unschlagbaren Preisen. Stöbern Sie jetzt und verwandeln Sie Ihr Zuhause in eine stilvolle Oase"
+                />
+            </Helmet>
+            <Box>
+                <SliderItem
+                    item={slides && slides[selectedSlideIndex]}
+                    prevSlide={prevSlide}
+                    nextSlide={nextSlide}
+                />
+                <Box as="main" py="6">
+                    {isLoading ? (
+                        <Flex justifyContent="center" my={4}>
+                            <Spinner />
+                        </Flex>
+                    ) : (
+                        <ProductList products={products} />
+                    )}
+                </Box>
             </Box>
-        </Box>
+        </>
     );
 };

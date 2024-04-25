@@ -1,16 +1,20 @@
 export const slides = [
   {
-    image: { url: "/images/pexels-math-90946.png" },
+    image: { url: "/images/schrank_grau.jpeg" },
     sale: 20,
-    price: 599.99,
-    title: "Camera Canon 5D",
-    description: " Body with Canon Log - Black",
+    price: 300,
+    originalPrice: 759,
+    title: "Kleiderschrank",
+    description: "FORTE Kleiderschrank Kalixtus",
+    link: "/product/66279a45c0d0daf7e81e4d3f",
   },
   {
-    image: { url: "/images/kam-idris-_HqHX3LBN18-unsplash.png" },
+    image: { url: "/images/tisch_braun.jpeg" },
     sale: 20,
-    price: 299.99,
-    title: "Designer Lounge Chair ",
-    description: "Yellow Designer Lounge Chair Ikea",
+    price: 210,
+    originalPrice: 379,
+    title: "Schreibtisch",
+    description: "FORTE Schreibtisch Clif",
+    link: "/product/66279a45c0d0daf7e81e4d30",
   },
 ];

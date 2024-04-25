@@ -1,4 +1,18 @@
-import { Box, Button, Flex, IconButton, Spinner } from "@chakra-ui/react";
+import {
+    Box,
+    Button,
+    Flex,
+    IconButton,
+    Popover,
+    PopoverArrow,
+    PopoverBody,
+    PopoverCloseButton,
+    PopoverContent,
+    PopoverHeader,
+    PopoverTrigger,
+    Spinner,
+    Text,
+} from "@chakra-ui/react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../components/wrapper/Wrapper";
@@ -13,6 +27,9 @@ import { ShippingInfo } from "../components/product/ShippingInfo";
 import { ProductInfo } from "../components/product/ProductInfo";
 import WishListButton from "../components/button/WishListButton";
 import ProductCard from "../components/product/ProductCard";
+import AppointmentForm from "../components/appointment/AppointmentForm";
+import { ContactPopover } from "../components/contact/ContactPopover";
+import { Helmet } from "react-helmet";
 
 export interface ProductDetailScreenProps {
     handleLikeToggle?: () => void;
@@ -57,6 +74,16 @@ export const ProductDetailScreen = ({
     };
     const { items } = useSelector((state: any) => state.wishList);
     const [isLiked, setIsLiked] = useState(false);
+    const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
+    const handleAppointmentSubmit = (
+        date: string,
+        time: string,
+        name: string,
+        email: string,
+        phone: string
+    ) => {
+        console.log("Termin vereinbart für:", time, date, name, email, phone);
+    };
 
     useEffect(() => {
         if (items && items.find((item: any) => item?._id === product?._id)) {
@@ -67,80 +94,105 @@ export const ProductDetailScreen = ({
     }, [items, product]);
 
     return (
-        <Wrapper padding="0">
-            {isLoading ? (
-                <Flex justifyContent="center" my={4}>
-                    <Spinner />
-                </Flex>
-            ) : (
-                <>
-                    {/* Alert */}
-                    {isItemAdded && (
-                        <Notification
-                            status="success"
-                            text="Item was added to your cart! "
-                        >
-                            <Box textDecoration="underline" ml={2}>
-                                <Link to="/cart">
-                                    {" "}
-                                    Go to checkout to complete your order.
-                                </Link>
-                            </Box>
-                        </Notification>
-                    )}
-                    <Box px={{ base: 4, md: 10 }} pb={{ base: 4, md: 10 }}>
-                        <IconButton
-                            aria-label="Back"
-                            icon={<ArrowLeft boxSize={8} />}
-                            _hover={{ opacity: "1" }}
-                            mb="3"
-                            onClick={() => window.history.back()}
-                        />
-                        <Flex
-                            gap={{ base: 4 }}
-                            flexWrap="wrap"
-                            justifyContent="space-between"
-                        >
-                            <Box width={{ base: "100%", md: "40%" }}>
-                                <ProductCard product={product} />
-                            </Box>
-                            <Flex
-                                flexDir="column"
-                                width={{ base: "100%", md: "40%" }}
-                                gap={{ base: 6, md: 10 }}
+        <>
+            <Helmet>
+                <title>{`${product?.title} %Reduziert | SALEx Shop`} </title>
+                <meta name="description" content={product?.description} />
+            </Helmet>
+            <Wrapper padding="0">
+                {isLoading ? (
+                    <Flex justifyContent="center" my={4}>
+                        <Spinner />
+                    </Flex>
+                ) : (
+                    <>
+                        {/* Alert */}
+                        {isItemAdded && (
+                            <Notification
+                                status="success"
+                                text="Item was added to your cart! "
                             >
-                                <ProductInfo
-                                    product={product}
-                                    setQty={setQty}
-                                    showSelectQty
-                                />
-                                <Flex gap="2">
-                                    <Button
-                                        borderRadius="none"
-                                        width="90%"
-                                        py={6}
-                                        bg="black"
-                                        color="white"
-                                        textTransform="uppercase"
-                                        disabled={product?.countInStock === 0}
-                                        onClick={addToCartHandler}
-                                    >
-                                        Add to bag
-                                    </Button>
-                                    <WishListButton
-                                        isLiked={isLiked}
-                                        handleAddToWishlist={
-                                            handleAddToWishlist
-                                        }
-                                        padding="6"
+                                <Box textDecoration="underline" ml={2}>
+                                    <Link to="/cart">
+                                        {" "}
+                                        Go to checkout to complete your order.
+                                    </Link>
+                                </Box>
+                            </Notification>
+                        )}
+                        <Box px={{ base: 4, md: 10 }} pb={{ base: 4, md: 10 }}>
+                            <IconButton
+                                aria-label="Back"
+                                icon={<ArrowLeft boxSize={8} />}
+                                _hover={{ opacity: "1" }}
+                                mb="3"
+                                onClick={() => window.history.back()}
+                            />
+                            <Flex
+                                gap={{ base: 4 }}
+                                flexWrap="wrap"
+                                justifyContent={{
+                                    base: "space-between",
+                                    md: "flex-start",
+                                }}
+                            >
+                                <Box width={{ base: "100%", md: "40%" }}>
+                                    <ProductCard product={product} />
+                                </Box>
+                                <Flex
+                                    flexDir="column"
+                                    width={{ base: "100%", md: "40%" }}
+                                    gap={{ base: 6, md: 10 }}
+                                >
+                                    <ProductInfo
+                                        product={product}
+                                        setQty={setQty}
+                                        showSelectQty
                                     />
+                                    <Flex gap="2">
+                                        <ContactPopover>
+                                            <Button
+                                                borderRadius="none"
+                                                width="90%"
+                                                py={6}
+                                                bg="black"
+                                                color="white"
+                                                textTransform="uppercase"
+                                                onClick={() =>
+                                                    setIsAppointmentOpen(
+                                                        !isAppointmentOpen
+                                                    )
+                                                }
+                                            >
+                                                Termin vereinbaren
+                                            </Button>
+                                        </ContactPopover>
+                                        <WishListButton
+                                            isLiked={isLiked}
+                                            handleAddToWishlist={
+                                                handleAddToWishlist
+                                            }
+                                            padding="6"
+                                        />
+                                    </Flex>
+                                    {/* {isAppointmentOpen && (
+                                    <AppointmentForm
+                                        onSubmit={handleAppointmentSubmit}
+                                    />
+                                )} */}
+
+                                    <Text fontSize="sm">
+                                        Um Ihre gewünschten Möbelstücke
+                                        abzuholen, vereinbaren Sie bitte einen
+                                        Termin mit unserem Team.
+                                    </Text>
+                                    <ShippingInfo />
                                 </Flex>
-                                <ShippingInfo />
                             </Flex>
-                        </Flex>
-                    </Box>
-                </>
-            )}
-        </Wrapper>
+                        </Box>
+                    </>
+                )}
+            </Wrapper>
+        </>
     );
 };

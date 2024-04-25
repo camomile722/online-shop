@@ -15,10 +15,14 @@ const WishListButton = ({
 }: WishListButtonProps) => {
     return (
         <CustomTooltip
-            label={isLiked ? "Remove from wishlist" : "Add to wishlist"}
+            label={
+                isLiked
+                    ? "Aus der Wunschliste entfernen"
+                    : "Zur Wunschliste hinzufügen"
+            }
         >
             <IconButton
-                aria-label="Add to wishlist"
+                aria-label="Zur Wunschliste hinzufügen"
                 icon={
                     isLiked ? (
                         <Liked color="brand.200" boxSize={boxSize ?? 5} />

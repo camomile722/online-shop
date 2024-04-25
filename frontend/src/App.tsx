@@ -4,6 +4,10 @@ import { Layout } from "./components/layout/Layout";
 import { ProductDetailScreen } from "./screens/ProductDetailScreen";
 import { CartScreen } from "./screens/CartScreen";
 import WishListScreen from "./screens/WishListScreen";
+import { DatenschutzScreen } from "./screens/DatenschutzScreen";
+import { ImpressumScreen } from "./screens/ImpressumScreen";
+import { ContactScreen } from "./screens/ContactScreen";
+import { ShoppingInfoScreen } from "./screens/ShoppingInfoScreen";
 
 function App() {
     return (
@@ -15,6 +19,10 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetailScreen />} />
                 <Route path="/cart" element={<CartScreen />} />
                 <Route path="/wish-list" element={<WishListScreen />} />
+                <Route path="/datenschutz" element={<DatenschutzScreen />} />
+                <Route path="/impressum" element={<ImpressumScreen />} />
+                <Route path="/contact" element={<ContactScreen />} />
+                <Route path="/shopping-info" element={<ShoppingInfoScreen />} />
                 {/* Using path="*"" means "match anything", so this route
               acts like a catch-all for URLs that we don't have explicit
               routes for. */}

@@ -7,9 +7,11 @@ import {
     Image,
     Text,
 } from "@chakra-ui/react";
+
 import { ArrowLeft, ArrowRight } from "../../theme/icons";
 import Wrapper from "../wrapper/Wrapper";
 import { RectangleBadge } from "../badge/RectangleBadge";
+import { useNavigate } from "react-router-dom";
 
 export interface SlideDataProps {
     id: string;
@@ -20,6 +22,8 @@ export interface SlideDataProps {
     title: string;
     description: string;
     price: number;
+    originalPrice?: number;
+    link: string;
 }
 
 export interface SliderItemProps {
@@ -29,6 +33,12 @@ export interface SliderItemProps {
 }
 
 export const SliderItem = ({ item, prevSlide, nextSlide }: SliderItemProps) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        // Navigate to the product screen with the specific ID
+        navigate(item.link);
+    };
     return (
         <Flex>
             <Box as="section" background="brand.100" width="100%">
@@ -56,14 +66,30 @@ export const SliderItem = ({ item, prevSlide, nextSlide }: SliderItemProps) => {
                                 {item?.description}
                             </Text>
                             <Box>
-                                <Text fontWeight="bold">{item?.price} €</Text>
+                                <Text fontWeight="bold">
+                                    Price:{" "}
+                                    <Text as="span" color="red.500">
+                                        {item?.price} €{" "}
+                                    </Text>
+                                </Text>
+                                <Text fontWeight="bold">
+                                    Original Preis:{" "}
+                                    <Text
+                                        fontWeight="bold"
+                                        textDecoration="line-through"
+                                        as="span"
+                                    >
+                                        {item?.originalPrice} €
+                                    </Text>
+                                </Text>
                                 <Box mt="6">
                                     <Button
                                         color="white"
                                         bg="brand.200"
                                         borderRadius="none"
+                                        onClick={handleClick}
                                     >
-                                        Buy now
+                                        Zum Artikel
                                     </Button>
                                 </Box>
                             </Box>

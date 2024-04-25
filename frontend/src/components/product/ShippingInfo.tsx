@@ -7,15 +7,26 @@ export const ShippingInfo = () => {
             <Flex justifyContent="space-between" alignItems="flex-end">
                 <Box>
                     <Transport boxSize={6} />
-                    <Text fontSize="xs" fontWeight="medium">
+                    {/* <Text fontSize="xs" fontWeight="medium">
                         1-5 working days
-                    </Text>
-                    <Text fontSize="xs" fontWeight="medium">
+                    </Text> 
+                     <Text fontSize="xs" fontWeight="medium">
                         Standart delivery
                     </Text>
+                    */}
+                    <Text fontSize="xs" fontWeight="medium">
+                        Selbstabholung im Landkreis Kassel
+                    </Text>
+
+                    <Text fontSize="xs" fontWeight="medium">
+                        Grebenstein, Hessen
+                    </Text>
                 </Box>
-                <Text fontWeight="medium" fontSize="sm">
+                {/* <Text fontWeight="medium" fontSize="sm">
                     Free shipping
+                </Text> */}
+                <Text fontWeight="medium" fontSize="sm">
+                    Nur Abholung
                 </Text>
             </Flex>
             <Divider mt="4" />
@@ -23,11 +34,11 @@ export const ShippingInfo = () => {
                 <Box>
                     <Retoure boxSize={6} />
                     <Text fontSize="xs" fontWeight="medium">
-                        100 day return policy
+                        Keine Rückgabe
                     </Text>
                 </Box>
                 <Text fontSize="sm" fontWeight="medium">
-                    Free delivery and free returns
+                    Keine Garantie
                 </Text>
             </Flex>
             <Divider mt="4" />

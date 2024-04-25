@@ -19,7 +19,11 @@ export const ProductInfo = ({
             <Text as="h1" fontSize={{ base: "2xl", xl: "4xl" }}>
                 {product?.title}
             </Text>
-            <Text>{product?.description}</Text>
+            <Text
+                dangerouslySetInnerHTML={{
+                    __html: product?.description,
+                }}
+            />
 
             <ProductPrice product={product} showOriginalPrice />
             {product?.countInStock > 0 && showSelectQty && setQty && (
@@ -38,7 +42,7 @@ export const ProductInfo = ({
                 </CustomTooltip>
             )}
             <Text my={2}>
-                Status:
+                Status:{" "}
                 <Text
                     as="span"
                     color={
@@ -46,13 +50,15 @@ export const ProductInfo = ({
                     }
                     fontWeight="bold"
                 >
-                    {product?.countInStock === 0 ? "Out of stock" : "In stock"}
+                    {product?.countInStock === 0
+                        ? "Nicht mehr verfügbar"
+                        : "Im Lager"}
                 </Text>
             </Text>
-            <Rating
+            {/* <Rating
                 value={product?.rating ?? 0}
                 numReviews={product?.numReviews}
-            />
+            /> */}
         </Box>
     );
 };

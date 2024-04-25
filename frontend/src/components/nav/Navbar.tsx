@@ -14,16 +14,16 @@ export const Navbar = () => {
     const { items } = useSelector((state: any) => state.wishList);
 
     const navIcons = [
-        {
-            id: 1,
-            icon: <ShoppingBag boxSize="20px" />,
-            url: "/cart",
-            badge: cartItems.length > 0,
-            badgeCount: cartItems.reduce(
-                (acc: number, item: any) => acc + item.qty,
-                0
-            ),
-        },
+        // {
+        //     id: 1,
+        //     icon: <ShoppingBag boxSize="20px" />,
+        //     url: "/cart",
+        //     badge: cartItems.length > 0,
+        //     badgeCount: cartItems.reduce(
+        //         (acc: number, item: any) => acc + item.qty,
+        //         0
+        //     ),
+        // },
         {
             id: 2,
             icon: <Like boxSize="20px" />,
@@ -31,7 +31,7 @@ export const Navbar = () => {
             badge: items.length > 0,
             badgeCount: items.length,
         },
-        { id: 3, icon: <User boxSize="20px" />, url: "/login" },
+        // { id: 3, icon: <User boxSize="20px" />, url: "/login" },
     ];
     return (
         <Wrapper>
@@ -41,7 +41,7 @@ export const Navbar = () => {
                         <Logo />
                     </Link>
                 </Box>
-                <UnorderedList
+                {/* <UnorderedList
                     styleType="none"
                     display="flex"
                     justifyContent="space-between"
@@ -70,7 +70,15 @@ export const Navbar = () => {
                             </ListItem>
                         ))}
                     </Box>
-                </UnorderedList>
+                </UnorderedList> */}
+                <Box display={{ base: "none", lg: "block" }}>
+                    <Text color="gray.600" as="h1" fontSize="34px">
+                        <Text as="span" fontWeight="bold" color="brand.200">
+                            RESTPOSTEN
+                        </Text>{" "}
+                        Möbelverkauf in Kassel
+                    </Text>
+                </Box>
                 <UnorderedList
                     display="flex"
                     styleType="none"
@@ -86,8 +94,16 @@ export const Navbar = () => {
                         />
                     ))}
                 </UnorderedList>
-                <NavBarMobile />
+                {/* <NavBarMobile /> */}
             </Flex>
+            <Box display={{ base: "block", lg: "none" }} mt="6">
+                <Text color="gray.600" as="h1" fontSize="20px">
+                    <Text as="span" fontWeight="bold" color="brand.200">
+                        RESTPOSTEN
+                    </Text>{" "}
+                    Möbelverkauf in Kassel
+                </Text>
+            </Box>
         </Wrapper>
     );
 };

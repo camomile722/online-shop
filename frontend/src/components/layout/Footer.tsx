@@ -3,11 +3,13 @@ import {
     Facebook,
     Instagram,
     Pinterest,
+    Tiktok,
     Twitter,
     Youtube,
 } from "../../theme/icons";
 import Wrapper from "../wrapper/Wrapper";
 import { Logo } from "./Logo";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
     return (
@@ -20,8 +22,13 @@ export const Footer = () => {
                 >
                     <Box>
                         <Box>
-                            <Text as="h4" mb={4} fontSize="xs">
-                                CUSTOMER CARE
+                            <Text
+                                as="h4"
+                                mb={4}
+                                fontSize="xs"
+                                textTransform="uppercase"
+                            >
+                                Kundenservice
                             </Text>
 
                             <UnorderedList
@@ -32,16 +39,29 @@ export const Footer = () => {
                                 gap={3}
                                 m="0"
                             >
-                                <ListItem>Help & Contact</ListItem>
-                                <ListItem>Partner program</ListItem>
-                                <ListItem>Delivery area</ListItem>
+                                <ListItem>
+                                    <Link to="/contact">Hilfe & Kontakt</Link>
+                                </ListItem>
+                                <ListItem>
+                                    <Link to="/datenschutz">Datenschutz</Link>
+                                </ListItem>
+                                <ListItem>
+                                    <Link to="/impressum">Impressum</Link>
+                                </ListItem>
+                                {/* <ListItem>Partner program</ListItem> */}
+                                {/* <ListItem>Delivery area</ListItem> */}
                             </UnorderedList>
                         </Box>
                     </Box>
                     <Box>
                         <Box>
-                            <Text as="h4" mb={4} fontSize="xs">
-                                SECURE SHOPPING
+                            <Text
+                                as="h4"
+                                mb={4}
+                                fontSize="xs"
+                                textTransform="uppercase"
+                            >
+                                So kaufen Sie bei uns ein
                             </Text>
 
                             <UnorderedList
@@ -52,9 +72,16 @@ export const Footer = () => {
                                 gap={3}
                                 m="0"
                             >
-                                <ListItem>Track Order</ListItem>
-                                <ListItem>Returns</ListItem>
-                                <ListItem>Shipping Info</ListItem>
+                                {/* <ListItem>Track Order</ListItem>
+                                <ListItem>Returns</ListItem> */}
+                                <ListItem>
+                                    <Link to="/shopping-info">
+                                        Shopping Info
+                                    </Link>
+                                </ListItem>
+                                {/* <ListItem>
+                                    <Link to="/datenschutz">Datenschutz</Link>
+                                </ListItem> */}
                             </UnorderedList>
                         </Box>
                     </Box>
@@ -63,21 +90,38 @@ export const Footer = () => {
                             <Logo />
                         </Box>
                         <Flex gap={4}>
-                            <Facebook boxSize="20px" />
-                            <Instagram boxSize="20px" />
-                            <Twitter boxSize="20px" />
-                            <Youtube boxSize="20px" />
-                            <Pinterest boxSize="20px" />
+                            <Link
+                                to="https://www.facebook.com/sale.mobel.sale"
+                                target="_blank"
+                            >
+                                <Facebook boxSize="20px" />
+                            </Link>
+
+                            {/* <Instagram boxSize="20px" /> */}
+
+                            <Link
+                                to="https://www.tiktok.com/@salexshop.de?_t=8lnkDUp2BQ8&_r=1"
+                                target="_blank"
+                            >
+                                <Tiktok boxSize="20px" />
+                            </Link>
+                            {/* <Youtube boxSize="20px" /> */}
                         </Flex>{" "}
                     </Flex>
                 </Flex>
                 <Flex mt={6}>
-                    <Text fontSize="xs">
+                    {/* <Text fontSize="xs">
                         {" "}
                         Free delivery for orders above 29.90 €, else shipping
                         fees of 3.90 € apply <br />
                         Lowest total price of the last 30 days before the price
                         reduction
+                        <br />
+                    </Text> */}
+                    <Text fontSize="sm" fontWeight="semibold">
+                        {" "}
+                        NUR SELBSTABHOLUNG keine Lieferung <br />
+                        Abholung im Landkreis Kassel, Grebenstein
                         <br />
                     </Text>
                 </Flex>

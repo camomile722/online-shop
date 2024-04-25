@@ -7,6 +7,8 @@ const slidesSchema = mongoose.Schema(
     description: { type: String, required: true },
     sale: { type: Number, required: false },
     price: { type: Number, required: true },
+    originalPrice: { type: Number, required: false },
+    link: { type: String, required: true },
   },
   {
     timestamps: true,

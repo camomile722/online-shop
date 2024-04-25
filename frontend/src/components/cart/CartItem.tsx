@@ -55,7 +55,7 @@ function CartItem({
                 <Box>
                     <Link to={`/product/${item._id}`}>
                         <Image
-                            src={item.image.url}
+                            src={item.images[0].url}
                             alt={item.title}
                             width="100px"
                         />

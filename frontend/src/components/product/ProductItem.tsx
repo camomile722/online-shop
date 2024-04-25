@@ -10,9 +10,10 @@ import ProductCard from "./ProductCard";
 
 export interface ProductProps {
     _id: string;
-    image: {
+    images: {
+        _id: string;
         url: string;
-    };
+    }[];
     sale?: number;
     likes: number;
     title: string;
@@ -24,6 +25,7 @@ export interface ProductProps {
     countInStock: number;
     category: string;
     qty: number;
+    originalPrice: number;
 }
 
 export interface ProductItemProps {
@@ -56,12 +58,11 @@ export const ProductItem = ({ product }: ProductItemProps) => {
                         handleAddToWishlist={handleAddToWishlist}
                     />
                 </Flex>
-                <Link to={`/product/${product._id}`}>
-                    <ProductCard
-                        product={product}
-                        imageHeight={{ base: "174px", md: "320px" }}
-                    />
-                </Link>
+
+                <ProductCard
+                    product={product}
+                    imageHeight={{ base: "174px", md: "320px" }}
+                />
             </Box>
             <Link to={`/product/${product._id}`}>
                 <Box position="relative" padding="4">
@@ -79,10 +80,10 @@ export const ProductItem = ({ product }: ProductItemProps) => {
                         showOriginalPrice
                     />
 
-                    <Rating
+                    {/* <Rating
                         value={product.rating}
                         numReviews={product.numReviews}
-                    />
+                    /> */}
                 </Box>{" "}
             </Link>
         </Box>

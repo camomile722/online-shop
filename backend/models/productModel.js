@@ -22,14 +22,14 @@ const productSchema = mongoose.Schema(
       ref: "User",
     },
 
-    image: { url: { type: String, required: true } },
+    images: [{ url: { type: String, required: true } }],
     sale: { type: Number, required: false },
     likes: { type: Number, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
+    originalPrice: { type: Number, required: false },
     brand: { type: String, required: true },
-
     countInStock: { type: Number, required: true, default: 0 },
     category: { type: String, required: true },
     reviews: [reviewSchema],

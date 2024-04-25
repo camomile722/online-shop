@@ -18,19 +18,31 @@ export const ProductPrice = ({
             <Text
                 as="h2"
                 fontSize={fontSize}
-                color={product?.sale ? "brand.200" : "black"}
+                color={product?.originalPrice ? "brand.200" : "black"}
                 fontWeight="bold"
                 mt={2}
             >
                 {sum ? product?.price * product.qty : product?.price} €
             </Text>
-            {product?.sale && showOriginalPrice && (
+            {/* {product?.sale && showOriginalPrice && (
                 <Text fontSize="xs">
                     Original Price:{" "}
                     <Text as="span" textDecoration="line-through">
                         {(sum
                             ? (product.price + product.sale) * product.qty
                             : product.price + product.sale
+                        ).toFixed(2)}{" "}
+                        €
+                    </Text>
+                </Text>
+            )} */}
+            {product?.originalPrice && showOriginalPrice && (
+                <Text fontSize="xs">
+                    Original Preis:{" "}
+                    <Text as="span" textDecoration="line-through">
+                        {(sum
+                            ? product.originalPrice * product.qty
+                            : product.originalPrice
                         ).toFixed(2)}{" "}
                         €
                     </Text>
